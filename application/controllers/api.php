@@ -435,4 +435,22 @@ class Api extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function save_qb_id() {
+     	$request_fields = array('user_id');
+      $request_form_success = true;
+	foreach ($request_fields as $request_field){		
+	      if (!isset($this->data[$request_field])) {
+                $request_form_success = false;
+                break;
+		}
+	}
+      if (!$request_form_success) {
+            $response['status'] = 0;
+            $response['msg'] = config_item('msg_fill_form');
+      } else {  
+            $response = $this->api_model->delete_intervention($this->data);
+      }  
+      echo json_encode($response);
+   }
+
 }
